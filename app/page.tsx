@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @next/next/no-img-element */
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { InteractiveCityMap } from "./InteractiveCityMap";
@@ -131,11 +132,6 @@ function OperationView({ incidents, selected, selectedId, setSelectedId, liveCou
       <section className="incident-detail"><div className="detail-top"><div><span>PROTOCOLO {selected.id} · {selected.rpa}</span><h2>{selected.type}</h2></div><span className={done ? "done-pill" : "risk-pill"}>{done ? "Concluída" : selected.priority}</span></div><div className="location-summary"><span>●</span><div><strong>{selected.area}, Recife</strong><small>{selected.reports} relato{selected.reports !== 1 ? "s" : ""} vinculado{selected.reports !== 1 ? "s" : ""}</small></div></div><div className="detail-summary"><span>✦ LEITURA OPERACIONAL</span><p>{selected.priority === "Crítica" ? "Ocorrência em área de atenção que exige vistoria prioritária e contato com a equipe regional." : "Relatos próximos foram estruturados para apoiar o encaminhamento da equipe responsável."}</p></div><dl><div><dt>Status</dt><dd>{done ? "Concluída" : selected.status}</dd></div><div><dt>Entrada</dt><dd>{selected.time}</dd></div><div><dt>Encaminhamento</dt><dd>Equipe regional · {selected.rpa}</dd></div></dl><button className="resolve-button" onClick={resolveIncident} disabled={done}>{done ? "✓ Atendimento concluído" : "Concluir atendimento"}</button><p className="button-help">A atualização aparece imediatamente na conversa.</p></section>
     </div>
   </>;
-}
-
-function CityMap({ incidents, selectedId, setSelectedId }: { incidents: Incident[]; selectedId: string; setSelectedId: (id: string) => void }) {
-  const positions: Record<string, { left: string; top: string }> = { "PT-2841": { left: "42%", top: "29%" }, "PT-2837": { left: "56%", top: "25%" }, "PT-2829": { left: "44%", top: "38%" }, "PT-2818": { left: "38%", top: "72%" }, "PT-2804": { left: "49%", top: "55%" }, "PT-2901": { left: "49%", top: "33%" }, "PT-2902": { left: "57%", top: "67%" } };
-  return <section className="city-map"><div className="map-heading"><div><span>MAPA DA CIDADE</span><h2>Recife em tempo real</h2></div><div className="map-legend"><span><i className="critical-dot" /> Crítica</span><span><i /> Alta/Média</span></div></div><div className="osm-wrap"><iframe title="Mapa do Recife no OpenStreetMap" src="https://www.openstreetmap.org/export/embed.html?bbox=-35.030%2C-8.180%2C-34.840%2C-7.930&amp;layer=mapnik" loading="lazy" />{incidents.slice(0, 7).map((incident) => { const position = positions[incident.id] ?? { left: "50%", top: "50%" }; return <button key={incident.id} style={position} className={`osm-pin ${incident.priority === "Crítica" ? "pin-critical" : ""} ${incident.source ? "pin-live" : ""} ${selectedId === incident.id ? "pin-selected" : ""}`} onClick={() => setSelectedId(incident.id)} aria-label={`${incident.type} em ${incident.area}`}><span>{incident.reports}</span><b>{incident.area}</b></button>; })}<div className="osm-credit">© OpenStreetMap contributors</div></div></section>;
 }
 
 function IncidentsView({ incidents, resolved, openIncident }: { incidents: Incident[]; resolved: string[]; openIncident: (id: string) => void }) {

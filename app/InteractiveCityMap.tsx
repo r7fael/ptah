@@ -52,6 +52,8 @@ export function InteractiveCityMap({ incidents, selectedId, setSelectedId }: {
       mapInstance.current = null;
       markerLayer.current = null;
     };
+  // The map instance must be created only once; marker updates use the effect below.
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
