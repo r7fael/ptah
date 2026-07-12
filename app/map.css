@@ -1,0 +1,14 @@
+@import "leaflet/dist/leaflet.css";
+
+.leaflet-container { font-family:Inter,"Segoe UI",Arial,sans-serif; }
+.ptah-marker { background:transparent!important; border:0!important; }
+.native-pin { width:104px; height:58px; display:flex; flex-direction:column; align-items:center; cursor:pointer; }
+.native-pin span { width:31px; height:31px; display:grid; place-items:center; border-radius:50% 50% 50% 8px; transform:rotate(-45deg); background:#e5a02e; color:#fff; border:2px solid #fff; box-shadow:0 2px 7px rgba(0,0,0,.27); position:relative; }
+.native-pin span i { transform:rotate(45deg); font-style:normal; font-size:9px; font-weight:900; }
+.native-pin b { margin-top:2px; background:rgba(255,255,255,.96); color:#344039; border-radius:4px; padding:2px 5px; font-size:8px; white-space:nowrap; box-shadow:0 1px 5px rgba(0,0,0,.18); font-weight:700; }
+.native-critical span { background:#ef6b45; }
+.native-selected span { background:#075e54; outline:3px solid rgba(7,94,84,.35); }
+.native-live span { animation:nativePinPulse 1.4s infinite; }
+.leaflet-control-zoom a { color:#29443a!important; }
+.leaflet-control-attribution { font-size:8px!important; }
+@keyframes nativePinPulse { 0%,100%{box-shadow:0 0 0 0 rgba(239,107,69,.5),0 2px 7px rgba(0,0,0,.27)} 50%{box-shadow:0 0 0 10px rgba(239,107,69,0),0 2px 7px rgba(0,0,0,.27)} }
